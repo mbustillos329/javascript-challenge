@@ -7,44 +7,47 @@ var tbody = d3.select("tbody");
 
 
 console.log(data);
-
-data.forEach(function(UFO) {
-  console.log(UFO);
+function buildTable(data){
+    tbody.html("");
+    data.forEach(function(UFO) {
+//   console.log(UFO);
   var row = tbody.append("tr");
   Object.entries(UFO).forEach(function([key, value]) {
-    console.log(key, value);
-
+    // console.log(key, value);
     var cell = row.append("td");
     cell.text(value);
   });
 });
+}
 
-// Select the button
-var button = d3.select("datetime.form-control");
+// Select button
+var button = d3.select("#button");
 
-// Select the form
+// Select  form
 var form = d3.select("#form");
 
-// Create event handlers 
-button.on("click", runEnter);
-form.on("submit",runEnter);
+d3.selectAll("#filter-btn").on("click", runEnter);
 
 // Complete the event handler function for the form
 function runEnter() {
-
-  // Prevent the page from refreshing
   d3.event.preventDefault();
-  
-  // Select the input element and get the raw HTML node
   var inputElement = d3.select("#datetime");
-
-  // Get the value property of the input element
   var inputValue = inputElement.property("value");
 
   console.log(inputValue);
-  console.log(date);
-
-  var filteredData = ufo.filter(date => date.datetime === inputValue);
-
+//   console.log(date);
+  let filteredData = tableData
+  if (inputValue) {
+    // Apply `filter` to the table data to only keep the
+    // rows where the `datetime` value matches the filter value
+    filteredData = filteredData.filter(row => row.datetime === inputValue);
+  };
+//   filteredData = filteredData.filter(row => row.datetime === inputValue);
   console.log(filteredData);
-}
+  buildTable(filteredData);
+  
+};
+buildTable(tableData);
+
+
+
