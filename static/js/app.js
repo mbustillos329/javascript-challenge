@@ -28,7 +28,7 @@ var form = d3.select("#form");
 
 d3.selectAll("#filter-btn").on("click", runEnter);
 
-// Complete the event handler function for the form
+
 function runEnter() {
   d3.event.preventDefault();
   var inputElement = d3.select("#datetime");
@@ -38,8 +38,7 @@ function runEnter() {
 //   console.log(date);
   let filteredData = tableData
   if (inputValue) {
-    // Apply `filter` to the table data to only keep the
-    // rows where the `datetime` value matches the filter value
+    
     filteredData = filteredData.filter(row => row.datetime === inputValue);
   };
 //   filteredData = filteredData.filter(row => row.datetime === inputValue);
